@@ -71,8 +71,8 @@ def perform_attack(attack, image_path, output_folder,image_np):
      adversarial_image = np.clip(adversarial_image, 0, 255).astype(np.uint8)
      adversarial_pil = Image.fromarray(adversarial_image)
      filename = os.path.basename(image_path)
-     output_path = os.path.join(output_folder, filename)
-     adversarial_pil.save(output_path)
-     return output_path         
+     #output_path = os.path.join(output_folder, filename)
+     adversarial_pil.save(output_folder)
+     return output_folder
 
    
