@@ -47,7 +47,7 @@ export class FileService {
           console.error(`Standard Error: ${stderr}`);
           reject(`Standard Error: ${stderr}`);
         } else {
-          console.log(`Output: ${filePath}`);
+          console.log("Script ran succesfully ");
         }
       });
     });
