@@ -19,11 +19,11 @@ export class FileController {
       storage: diskStorage({
         destination: './uploads',
         filename: (req, file, cb) => {
-          const suffix = req.params.suffix; // Here comes the magic suffix
-          const originalName = file.originalname.split('.')[0]; // Get base name of file
-          const fileExt = file.originalname.split('.').pop(); // Get file extension
-          const fileName = `${originalName}-${suffix}.${fileExt}`; // Sneak in the suffix
-          cb(null, fileName); // Save the file with the new name
+          const suffix = req.params.suffix;
+          const originalName = file.originalname.split('.')[0];
+          const fileExt = file.originalname.split('.').pop();
+          const fileName = `${originalName}-${suffix}.${fileExt}`;
+          cb(null, fileName);
         },
       }),
       fileFilter: (req, file, cb) => {

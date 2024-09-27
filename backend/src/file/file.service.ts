@@ -4,11 +4,9 @@ import { join } from 'path';
 
 @Injectable()
 export class FileService {
-  // Modify this method to append the suffix to the filename
   public async runScript(file: Express.Multer.File): Promise<string> {
     const originalName = file.filename.split('.')[0];
-    const filePath = join(__dirname, '../..', 'uploads', originalName); // New file path with suffix
-
+    const filePath = join(__dirname, '../..', 'uploads', originalName);
     // Run the shell script on the file
     const result = await this.runShellScript(filePath);
 
