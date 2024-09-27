@@ -1,0 +1,56 @@
+.result-container {
+    position: absolute;
+    background-color: #343d47;
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.card-image {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.responsive-image {
+    height: 300px;
+    padding: 20px;
+  
+}
+
+.linear-progress {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.downloadIcon {
+    padding-top: 70px;
+}
+
+.file-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #343d47;
+    width: 700px;
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+}
