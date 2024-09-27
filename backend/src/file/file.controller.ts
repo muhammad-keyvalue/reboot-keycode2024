@@ -12,14 +12,20 @@ import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { FileService } from './file.service';
+import { FileData } from './fileData';
 
 @Controller('files')
 export class FileController {
   constructor(private readonly fileService: FileService) {}
 
   @Get('/:imageName')
-  async findAll(@Param('imageName') imageName: string, @Res() res: Response) {
+  async getImage(@Param('imageName') imageName: string, @Res() res: Response) {
     return this.fileService.getImage(imageName, res);
+  }
+
+  @Get('/processedData/:imageName')
+  async getProcessedData(@Param('imageName') imageName: string) : Promise<FileData[]>{
+    return this.fileService.getProcessedData(imageName);
   }
 
   @Post('upload/:suffix')
