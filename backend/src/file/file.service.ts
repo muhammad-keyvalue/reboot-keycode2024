@@ -5,6 +5,7 @@ import { createReadStream, existsSync } from 'fs';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { FileData } from './fileData';
+import { exec } from 'child_process';
 
 @Injectable()
 export class FileService {
@@ -31,7 +32,25 @@ export class FileService {
     //     resolve(stdout);
     //   });
     // });
+    this.runSampleScript(filePath);
     return `${filePath}`;
+  }
+
+   runSampleScript(filePath: string) {
+    new Promise((resolve, reject) => {
+      // Run the shell script and pass the fileName as an argument
+      exec(`./src/processed/sample.sh sample.jpeg`, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error.message}`);
+          reject(`Error: ${error.message}`);
+        } else if (stderr) {
+          console.error(`Standard Error: ${stderr}`);
+          reject(`Standard Error: ${stderr}`);
+        } else {
+          console.log(`Output: ${filePath}`);
+        }
+      });
+    });
   }
 
   getImage(imageName: string, res: Response) {

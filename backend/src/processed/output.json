@@ -1,12 +1,2 @@
 [
-    {
-        "imageName":"sample.jpeg",
-         "downloadUrl":"http://localhost:3000/files/sample-first.jpeg",
-         "detectionRate":60
-    },
-    {
-        "imageName":"sample.jpeg",
-         "downloadUrl":"http://localhost:3000/files/sample-second.jpeg",
-         "detectionRate":80
-    }  
 ]
