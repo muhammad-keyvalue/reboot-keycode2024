@@ -4,7 +4,11 @@ import {
   UploadedFile,
   UseInterceptors,
   BadRequestException,
+  Get,
+  Param,
+  Res,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { FileService } from './file.service';
@@ -12,6 +16,11 @@ import { FileService } from './file.service';
 @Controller('files')
 export class FileController {
   constructor(private readonly fileService: FileService) {}
+
+  @Get('/:imageName')
+  async findAll(@Param('imageName') imageName: string, @Res() res: Response) {
+    return this.fileService.getImage(imageName, res);
+  }
 
   @Post('upload/:suffix')
   @UseInterceptors(
