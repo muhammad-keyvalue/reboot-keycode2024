@@ -2,14 +2,29 @@ import argparse
 import os
 import json
 import shutil
-from poison_image import protect_image
+
+from mitm_attack import protect_image_mitm
 from res import evaluate_image
+from poison_image import protect_image
+
+
+def process_image(image_path, output_image_path, protect_func):
+    if os.path.exists(output_image_path):
+        os.remove(output_image_path)
+    return protect_func(image_path, output_image_path)
+
 
 def main():
     parser = argparse.ArgumentParser(description="Process an image.")
-    parser.add_argument('--image', help="Path to the input image", default="images/dog.png")
-    parser.add_argument('--output_image_path', help="Path to save the output images",default="images")
-    parser.add_argument('--json_path', help="Path to save the JSON file",default="json")
+    parser.add_argument(
+        "--image", help="Path to the input image", default="images/dog.png"
+    )
+    parser.add_argument(
+        "--output_image_path", help="Path to save the output images", default="images"
+    )
+    parser.add_argument(
+        "--json_path", help="Path to save the JSON file", default="json"
+    )
     args = parser.parse_args()
 
     if not args.image:
@@ -28,7 +43,7 @@ def main():
     # Define the level counts
     level_counts = [1, 2]
 
-    org_id,org_prb = evaluate_image(image_path)
+    org_id, org_prb = evaluate_image(image_path)
 
     base_url = "http://localhost:3000/files/"
 
@@ -36,33 +51,40 @@ def main():
 
     try:
         shutil.copy(image_path, destination)
-        print(f'File copied from {image_path} to {destination}')
+        print(f"File copied from {image_path} to {destination}")
     except Exception as e:
-        print(f'Error copying file: {e}')
+        print(f"Error copying file: {e}")
 
-    json_data = [ {
-        "imageName": f"{image_name}{image_extension}",
-        "downloadUrl": f"{base_url}{image_name}{image_extension}",
-        "detectionObject": org_id,
-        "detectionRate": org_prb
-    }]
-    
+    json_data = [
+        {
+            "imageName": f"{image_name}{image_extension}",
+            "downloadUrl": f"{base_url}{image_name}{image_extension}",
+            "detectionObject": org_id,
+            "detectionRate": org_prb,
+        }
+    ]
 
-    for i, level_count in enumerate(level_counts, start=1):
+    protect_funcs = [protect_image, protect_image_mitm]
+    for i, protect_func in enumerate(protect_funcs, start=1):
         output_image_name = f"{image_name}_{i}{image_extension}"
         output_image_path = os.path.join(image_folder, output_image_name)
-        id, probability = protect_image(image_path, output_image_path, level_count=level_count, current_count=0)
+        current_id, current_prob = process_image(
+            image_path, output_image_path, protect_func
+        )
 
-        json_data.append({
-            "imageName": f"{image_name}{image_extension}",
-            "downloadUrl": f"{base_url}{output_image_name}",
-            "detectionRate": probability,
-            "detectionObject": id
-        })
+        json_data.append(
+            {
+                "imageName": f"{image_name}{image_extension}",
+                "downloadUrl": output_image_path,
+                "detectedObject": current_id,
+                "detectionRate": current_prob,
+            }
+        )
 
-    json_output_path = os.path.join(json_folder, f"output.json")
-    with open(json_output_path, 'w') as json_file:
+    json_output_path = os.path.join(json_folder, f"{image_name}.json")
+    with open(json_output_path, "w") as json_file:
         json.dump(json_data, json_file, indent=2)
+
 
 if __name__ == "__main__":
     main()
