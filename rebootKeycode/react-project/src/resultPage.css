@@ -1,13 +1,14 @@
 .result-container {
     position: absolute;
-    background-color: #343d47;
+    background-color: black;
     width: 100%;
     min-height: 100vh;
     top: 0;
     left: 0;
     display: flex;
     justify-content: center;
-    gap: 10%;
+    flex-direction: column;
+    gap: 30%;
 }
 
 .card-content {
@@ -15,6 +16,10 @@
     flex-direction: column;
     justify-content: center;
 
+}
+
+.result-cards {
+    padding-top: 50px;
 }
 
 .card-image {
@@ -31,7 +36,7 @@
 .responsive-image {
     height: 300px;
     padding: 20px;
-  
+
 }
 
 .linear-progress {
@@ -40,7 +45,7 @@
 }
 
 .downloadIcon {
-    padding-top: 70px;
+    padding-top: 40px;
 }
 
 .file-info {
@@ -53,4 +58,22 @@
     padding: 20px;
     border-radius: 20px;
     color: white;
+}
+
+.user-file-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #343d47;
+    width: 700px;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+}
+
+.pricing-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
