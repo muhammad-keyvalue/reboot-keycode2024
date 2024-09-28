@@ -29,12 +29,6 @@ const ResultPage = () => {
     navigate("/pricing");
   };
 
-  const getColor = (value) => {
-    if (value == 17.8) return "#3A6D8C";
-    if (value === 20) return "#57A10C";
-    return "#57A10C";
-  };
-
   const handleDownloadClick = async (url) => {
     try {
       const response = await fetch(url);
@@ -141,16 +135,14 @@ const ResultPage = () => {
                     <div className="linear-progress">
                       <LinearProgress
                         variant="determinate"
-                        value={data[index].detectionRate}
+                        value={data[index].detectionRate*100}
                         sx={{
                           marginTop: 2,
                           height: 20,
                           borderRadius: 5,
                           [`& .${linearProgressClasses.bar}`]: {
                             borderRadius: 5,
-                            backgroundColor: getColor(
-                              data[index].detectionRate
-                            ),
+                            backgroundColor: index === 0 ? '#3A6D8C' : '#57A10C',
                           },
                         }}
                       />

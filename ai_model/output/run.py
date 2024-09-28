@@ -27,7 +27,7 @@ def main():
     image_extension = os.path.splitext(image_path)[1]
 
     # Define the level counts
-    level_counts = [1, 2]
+    level_counts = [2, 5]
 
     org_id,org_prb = evaluate_image(image_path)
 
