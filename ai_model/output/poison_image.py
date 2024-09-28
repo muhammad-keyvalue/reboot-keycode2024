@@ -13,7 +13,7 @@ from res import evaluate_image
 import tensorflow as tf
 
 
-def protect_image(image_path, output_folder, level_count=40, current_count=0):
+def protect_image(image_path, output_folder, level_count=5, current_count=0):
     # Load and preprocess image
     org_id, org_prob = evaluate_image(image_path)
     image = Image.open(image_path).convert("RGB")
