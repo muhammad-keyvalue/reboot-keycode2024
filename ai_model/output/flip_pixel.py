@@ -2,10 +2,11 @@ import random
 from PIL import Image
 import numpy as np
 
+
 def flip_random_pixels(image_path, output_path, flip_percentage=0.001):
     # Open the image
     img = Image.open(image_path)
-    img = img.convert('RGB')  # Ensure it's in RGB format
+    img = img.convert("RGB")  # Ensure it's in RGB format
 
     # Convert image to numpy array for pixel manipulation
     img_array = np.array(img)
