@@ -74,11 +74,15 @@ const UploadUser = () => {
         }
       );
       console.log("File uploaded successfully:", response.data);
+      const baseName = fileName.substring(0, fileName.lastIndexOf('.'));
+      const extension = fileName.substring(fileName.lastIndexOf('.'));
+      const newFileName = `${baseName}-${uuid}${extension}`;
 
       const pollForImage = async () => {
         try {
+
           const pollResponse = await axios.get(
-            `http://localhost:3000/files/processedData/${fileName}`
+            `http://localhost:3000/files/processedData/${newFileName}`
           );
           if (
             pollResponse.statusText === "OK" &&
