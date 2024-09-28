@@ -25,8 +25,6 @@ const ResultPage = () => {
     return 4;
   };
 
-  const projName = ["Siamese cat","Hamster","West Highland white terrier"]
-
   const handlePricingButtonClick = () => {
     navigate("/pricing");
   };
@@ -139,7 +137,7 @@ const ResultPage = () => {
                         sx={{ width: "80%", objectFit: "contain" }}
                       />
                     </div>
-                    <div className="detection-text">{index === 0 ?"Original Image: ": "Detected As: " }<span>{projName[index]}</span> </div> 
+                    <div className="detection-text">{index === 0 ?"Original Image: ": "Detected As: " }<span>{data[index].detectionObject}</span> </div> 
                     <div className="linear-progress">
                       <LinearProgress
                         variant="determinate"

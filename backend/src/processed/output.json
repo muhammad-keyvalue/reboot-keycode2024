@@ -3,19 +3,19 @@
     "imageName": "Cool_cat-test4.jpg",
     "downloadUrl": "http://localhost:3000/files/Driving_cat.png",
     "detectionRate": 17.8,
-    "name": "Siamese cat"
+    "detectionObject": "Siamese cat"
   },
   {
     "imageName": "Cool_cat-test4.jpg",
     "downloadUrl": "http://localhost:3000/files/Output.jpg",
     "detectionRate": 20,
-    "name": "hamster"
+    "detectionObject": "hamster"
 
   },
   {
     "imageName": "Cool_cat-test4.jpg",
     "downloadUrl": "http://localhost:3000/files/ham.png",
     "detectionRate": 42,
-    "name": "West Highland white terrier"
+    "detectionObject": "West Highland white terrier"
   }
 ]
