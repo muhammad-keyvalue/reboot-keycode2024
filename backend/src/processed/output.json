@@ -1,12 +1,17 @@
 [
-    {
-        "imageName":"sample.jpeg",
-         "downloadUrl":"http://localhost:3000/files/sample-first.jpeg",
-         "detectionRate":60
-    },
-    {
-        "imageName":"sample.jpeg",
-         "downloadUrl":"http://localhost:3000/files/sample-second.jpeg",
-         "detectionRate":80
-    }  
+  {
+    "imageName": "Driving_cat-test5.png",
+    "downloadUrl": "http://localhost:3000/files/Driving_cat-test5_1.png",
+    "detectionRate": 2
+  },
+  {
+    "imageName": "Driving_cat-test5.png",
+    "downloadUrl": "http://localhost:3000/files/Driving_cat-test5_2.png",
+    "detectionRate": 5
+  },
+  {
+    "imageName": "Driving_cat-test5.png",
+    "downloadUrl": "http://localhost:3000/files/Driving_cat-test5_3.png",
+    "detectionRate": 8
+  }
 ]

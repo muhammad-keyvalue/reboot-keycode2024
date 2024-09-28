@@ -28,6 +28,7 @@ def main():
     level_counts = [2, 5, 8]
 
     json_data = []
+    base_url = "http://localhost:3000/files/"
 
     for i, level_count in enumerate(level_counts, start=1):
         output_image_name = f"{image_name}_{i}{image_extension}"
@@ -36,11 +37,11 @@ def main():
 
         json_data.append({
             "imageName": f"{image_name}{image_extension}",
-            "downloadUrl": output_image_path,
+            "downloadUrl": f"{base_url}{output_image_name}",
             "detectionRate": level_count
         })
 
-    json_output_path = os.path.join(json_folder, f"{image_name}.json")
+    json_output_path = os.path.join(json_folder, f"output.json")
     with open(json_output_path, 'w') as json_file:
         json.dump(json_data, json_file, indent=2)
 
