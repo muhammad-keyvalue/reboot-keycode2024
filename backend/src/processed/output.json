@@ -1,21 +1,20 @@
 [
   {
-    "imageName": "Cool_cat-test4.jpg",
-    "downloadUrl": "http://localhost:3000/files/Driving_cat.png",
-    "detectionRate": 17.8,
-    "detectionObject": "Siamese cat"
+    "imageName": "premium-service-test8.png",
+    "downloadUrl": "http://localhost:3000/files/premium-service-test8.png",
+    "detectionObject": "envelope",
+    "detectionRate": 0.47074827551841736
   },
   {
-    "imageName": "Cool_cat-test4.jpg",
-    "downloadUrl": "http://localhost:3000/files/Output.jpg",
-    "detectionRate": 20,
-    "detectionObject": "hamster"
-
+    "imageName": "premium-service-test8.png",
+    "downloadUrl": "http://localhost:3000/files/premium-service-test8_1.png",
+    "detectionRate": 0.5449778437614441,
+    "detectionObject": "jigsaw puzzle"
   },
   {
-    "imageName": "Cool_cat-test4.jpg",
-    "downloadUrl": "http://localhost:3000/files/ham.png",
-    "detectionRate": 42,
-    "detectionObject": "West Highland white terrier"
+    "imageName": "premium-service-test8.png",
+    "downloadUrl": "http://localhost:3000/files/premium-service-test8_2.png",
+    "detectionRate": 0.5449778437614441,
+    "detectionObject": "jigsaw puzzle"
   }
 ]

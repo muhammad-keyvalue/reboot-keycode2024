@@ -24,7 +24,9 @@ export class FileController {
   }
 
   @Get('/processedData/:imageName')
-  async getProcessedData(@Param('imageName') imageName: string) : Promise<FileData[]>{
+  async getProcessedData(
+    @Param('imageName') imageName: string,
+  ): Promise<FileData[]> {
     return this.fileService.getProcessedData(imageName);
   }
 
@@ -53,8 +55,24 @@ export class FileController {
       },
     }),
   )
-  async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    const result = await this.fileService.runScript(file);
-    return { message: 'File uploaded and processed', result };
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Res() res: Response,
+  ) {
+    try {
+      const result = await this.fileService.runScript(file);
+
+      return res.status(200).json({
+        message: 'File uploaded and Python script executed successfully',
+        result: result,
+      });
+    } catch (error) {
+      console.error('Error executing Python script:', error);
+
+      return res.status(500).json({
+        message: 'Error executing Python script',
+        error: error,
+      });
+    }
   }
 }
