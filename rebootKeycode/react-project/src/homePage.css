@@ -1,0 +1,255 @@
+.homepage-container {
+    position: absolute;
+    background-color: black;
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    gap: 10%;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    padding-left: 100px;
+    padding-top: 100px;
+}
+
+.uploaded-image {
+    width: 50px;
+    height: 50px;
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+}
+
+.logo-text {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    padding: 35px;
+    align-items: center;
+}
+
+.logo-text1 {
+    color: white;
+    font-family: 'inter';
+    font-size: 60px;
+}
+
+.logo-text2 {
+    color: white;
+    font-family: 'inter';
+    font-size: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    padding-top: 0px;
+    justify-content: space-between;
+}
+
+.content-left {
+    padding: 100px;
+    padding-left: 200px;
+    padding-top: 70px;
+}
+
+.login-content-left {
+    padding-top: 10px;
+    padding-left: 100px;
+    padding-bottom: 100px;
+    padding-right: 100px;
+}
+
+.left1 {
+    color: white;
+    font-family: 'inter';
+    font-size: 45px;
+    font-weight: 400;
+
+}
+
+.terms {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.label-terms {
+    color: white;
+    font-family: 'inter';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6px;
+
+}
+
+.label-term1 {
+    font-size: 22px;
+}
+
+.login-left1 {
+    color: white;
+    font-family: 'inter';
+    font-size: 39px;
+    font-weight: 400;
+    text-align: end;
+
+}
+
+.custom-input::placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.left2 {
+    width: 100%;
+    color: white;
+    font-family: 'inter';
+    font-size: 19px;
+    line-height: 24px;
+}
+
+.homepage-button-container1 {
+    padding-top: 90px;
+    padding-bottom: 30px;
+    padding-left: 60px;
+    position: relative;
+}
+
+
+.loginPage-button-container1 {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    padding-left: 60px;
+}
+
+.login-button-container1 {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    padding-left: 60px;
+}
+
+.homepage-button-container2 {
+    padding-left: 60px;
+    padding-top: 10px;
+}
+
+.homepage-button-container3 {
+    padding-left: 60px;
+    padding-top: 30px;
+}
+
+
+.content-right {
+    color: white;
+    font-family: 'inter';
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: end;
+    position: relative;
+    width: 800px;
+
+}
+
+.content-right .content-item {
+    position: relative;
+    padding-right: 40px;
+    /* Adjust padding as needed */
+}
+
+.vertical-line {
+    width: 7px;
+    background-color: #74818F;
+    height: 60vh;
+    margin: 0 20px;
+    margin-left: 500px;
+}
+
+.content-right .content-item::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 46px;
+    background: #6E7B8A;
+}
+
+.pricing-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'inter';
+}
+
+.star-icon {
+    height: 200px;
+}
+
+.content-right .content-item {
+    position: relative;
+    padding-right: 40px;
+  }
+  
+  .content-item{
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 40px;
+  }
+  .content-right .content-item::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #6E7B8A;
+    transition: width 0.3s ease;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  
+  .content-right .content-item:hover::before {
+    width: 100%;
+  }
+
+  .content-right .content-item span {
+    position: relative;
+    z-index: 1; 
+    color: #fff; 
+  }
+  
+
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .premium-price {
+    margin-right: 45px;
+  }
