@@ -2,7 +2,6 @@ import argparse
 import os
 import json
 import shutil
-from flip_pixel import flip_random_pixels
 from poison_image import protect_image
 from res import evaluate_image
 
