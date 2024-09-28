@@ -1,12 +1,21 @@
 [
-    {
-        "imageName":"sample.jpeg",
-         "downloadUrl":"http://localhost:3000/files/sample-first.jpeg",
-         "detectionRate":60
-    },
-    {
-        "imageName":"sample.jpeg",
-         "downloadUrl":"http://localhost:3000/files/sample-second.jpeg",
-         "detectionRate":80
-    }  
+  {
+    "imageName": "Cool_cat-test4.jpg",
+    "downloadUrl": "http://localhost:3000/files/Driving_cat.png",
+    "detectionRate": 17.8,
+    "detectionObject": "Siamese cat"
+  },
+  {
+    "imageName": "Cool_cat-test4.jpg",
+    "downloadUrl": "http://localhost:3000/files/Output.jpg",
+    "detectionRate": 20,
+    "detectionObject": "hamster"
+
+  },
+  {
+    "imageName": "Cool_cat-test4.jpg",
+    "downloadUrl": "http://localhost:3000/files/ham.png",
+    "detectionRate": 42,
+    "detectionObject": "West Highland white terrier"
+  }
 ]
