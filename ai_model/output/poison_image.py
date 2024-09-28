@@ -1,15 +1,15 @@
 import os
 import numpy as np
 from PIL import Image
-from art.attacks.evasion import ProjectedGradientDescent, DeepFool, SaliencyMapMethod, UniversalPerturbation
+from art.attacks.evasion import ProjectedGradientDescent, DeepFool, SaliencyMapMethod, UniversalPerturbation, MomentumIterativeMethod
 from art.estimators.classification import TensorFlowV2Classifier
-from unet import blend
 from res import evaluate_image
 import tensorflow as tf
 
-def protect_image(image_path, output_folder,level_count=40,current_count=0):
+
+def protect_image(image_path, output_folder, level_count=40, current_count=0):
     # Load and preprocess image
-    org_id,org_prob = evaluate_image(image_path) 
+    org_id, org_prob = evaluate_image(image_path)
     image = Image.open(image_path).convert('RGB')
 
     # Resize image to 224x224 to match ResNet50's input size
@@ -33,46 +33,33 @@ def protect_image(image_path, output_folder,level_count=40,current_count=0):
     )
 
     # Create a stronger PGD attack method
-    # attack = ProjectedGradientDescent(
-    #     estimator=classifier,
-    #     norm=np.inf,             # Use infinity norm for perturbations
-    #     eps=0.3,                 # Increased attack strength (larger epsilon)
-    #     eps_step=0.05,           # Increased step size
-    #     max_iter=100,            # Increased number of iterations
-    #     targeted=False
-    # )
-
     attack = DeepFool(
         classifier=classifier,
         max_iter=1000,  # Increased iterations
-        epsilon=1e-2       # Increased step size for stronger perturbations
-    )    #attack = SaliencyMapMethod(classifier=classifier, theta=0.1, gamma=0.1)
+        epsilon=1e-2  # Increased step size for stronger perturbations
+    )
 
-    output_path=perform_attack(attack, image_path, output_folder,image_np)
-    #adversarial_image = deepfool.generate(x=image_np)
+    output_path = perform_attack(attack, output_folder, image_np)
+    current_id, current_prob = evaluate_image(output_path)
 
-    # Apply adversarial perturbation
-   
-    #blend(image_path, output_path)
-    current_id,current_prob = evaluate_image(output_path)
-    if(current_id!=org_id or current_count>level_count):
+    if current_id != org_id or current_count > level_count:
         print("The image is protected")
+        print(current_id)
+        print(current_prob)
+        return current_id, current_prob
     else:
-         print("Current Probability: ",current_prob)
-         print("Original Probability: ",org_prob)
-         current_count+=1
-         protect_image(output_path, output_folder,level_count,current_count)
+        print("Current Probability: ", current_id)
+        print("Current Probability: ", current_prob)
+        print("Original Probability: ", org_prob)
+        current_count += 1
+        return protect_image(output_path, output_folder, level_count, current_count)
 
-def perform_attack(attack, image_path, output_folder,image_np):
+def perform_attack(attack, output_folder,image_np):
      adversarial_image = attack.generate(x=image_np)
 
     # Postprocess and save image
      adversarial_image = np.squeeze(adversarial_image) * 255.0
      adversarial_image = np.clip(adversarial_image, 0, 255).astype(np.uint8)
      adversarial_pil = Image.fromarray(adversarial_image)
-     filename = os.path.basename(image_path)
-     #output_path = os.path.join(output_folder, filename)
      adversarial_pil.save(output_folder)
      return output_folder
-
-   

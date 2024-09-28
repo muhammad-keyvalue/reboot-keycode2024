@@ -1,8 +1,10 @@
 import argparse
 import os
 import json
+import shutil
 from flip_pixel import flip_random_pixels
 from poison_image import protect_image
+from res import evaluate_image
 
 def main():
     parser = argparse.ArgumentParser(description="Process an image.")
@@ -25,20 +27,38 @@ def main():
     image_extension = os.path.splitext(image_path)[1]
 
     # Define the level counts
-    level_counts = [2, 5, 8]
+    level_counts = [1, 2]
 
-    json_data = []
+    org_id,org_prb = evaluate_image(image_path)
+
     base_url = "http://localhost:3000/files/"
+
+    destination = f"{image_folder}/{image_name}{image_extension}"
+
+    try:
+        shutil.copy(image_path, destination)
+        print(f'File copied from {image_path} to {destination}')
+    except Exception as e:
+        print(f'Error copying file: {e}')
+
+    json_data = [ {
+        "imageName": f"{image_name}{image_extension}",
+        "downloadUrl": f"{base_url}{image_name}{image_extension}",
+        "detectionObject": org_id,
+        "detectionRate": org_prb
+    }]
+    
 
     for i, level_count in enumerate(level_counts, start=1):
         output_image_name = f"{image_name}_{i}{image_extension}"
         output_image_path = os.path.join(image_folder, output_image_name)
-        protect_image(image_path, output_image_path, level_count=level_count, current_count=0)
+        id, probability = protect_image(image_path, output_image_path, level_count=level_count, current_count=0)
 
         json_data.append({
             "imageName": f"{image_name}{image_extension}",
             "downloadUrl": f"{base_url}{output_image_name}",
-            "detectionRate": level_count
+            "detectionRate": probability,
+            "detectionObject": id
         })
 
     json_output_path = os.path.join(json_folder, f"output.json")

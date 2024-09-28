@@ -17,7 +17,8 @@ from torchvision import transforms
 def evaluate_image(filename):
     model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet50', pretrained=True)
     model.eval()
-    input_image = Image.open(filename)
+    input_image = Image.open(filename).convert('RGB')
+
     preprocess = transforms.Compose([
         transforms.Resize(256),
         transforms.CenterCrop(224),
@@ -46,4 +47,4 @@ def evaluate_image(filename):
 # Show top categories per image
     topx_prob, topx_catid = torch.topk(probabilities, 1)
     for i in range(topx_prob.size(0)):
-        return topx_catid, topx_prob
+        return categories[topx_catid[i]], topx_prob[i].item()

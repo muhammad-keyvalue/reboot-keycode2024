@@ -98,6 +98,7 @@ export class FileService {
       .map((item) => ({
         url: item.downloadUrl,
         detectionRate: item.detectionRate,
+        detectionObject: item.detectionObject,
       }));
 
     return filteredData;

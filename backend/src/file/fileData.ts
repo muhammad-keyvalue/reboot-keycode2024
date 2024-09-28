@@ -1,4 +1,5 @@
 export class FileData {
-    url: string;
-    detectionRate: number;
-  }
+  url: string;
+  detectionRate: number;
+  detectionObject: string;
+}
