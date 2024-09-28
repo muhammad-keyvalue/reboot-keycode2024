@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Response } from 'express';
 import { createReadStream, existsSync } from 'fs';
-import { exec } from 'child_process';
+import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { FileData } from './fileData';
@@ -13,46 +13,53 @@ export class FileService {
     const fileName = file.filename;
     const filePath = join(__dirname, '../..', 'uploads', fileName);
 
-    // Run the shell script on the file
-    await this.runShellScript(filePath);
+    // Run the shell script on the file asynchronously
+    this.runShellScript(filePath);
 
-    return 'Image uploaded and processed successfully';
+    return 'Image upload initiated successfully, processing in the background.';
   }
 
   // Run the shell script on the uploaded file
-  private runShellScript(filePath: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const scriptPath = join(
-        __dirname,
-        '../../..',
-        'ai_model/output',
-        'run.py',
-      );
+  private runShellScript(filePath: string): void {
+    const scriptPath = join(__dirname, '../../..', 'ai_model/output', 'run.py');
+    const outputImagePath = 'src/processed';
+    const jsonPath = 'src/processed';
 
-      const outputImagePath = 'src/processed';
-      const jsonPath = 'src/processed';
+    console.log(`Starting Python script: ${scriptPath} with file: ${filePath}`);
 
-      // Log the start of the process
-      console.log(`Executing Python script: ${scriptPath}`);
-      console.log(`File path: ${filePath}`);
+    // Use spawn to run the Python script
+    const process = spawn('python3', [
+      scriptPath,
+      '--image',
+      filePath,
+      '--output_image_path',
+      outputImagePath,
+      '--json_path',
+      jsonPath,
+    ]);
 
-      // Execute the Python script using 'exec'
-      exec(
-        `python3 ${scriptPath} --image ${filePath} --output_image_path ${outputImagePath} --json_path ${jsonPath}`,
-        (error, stdout, stderr) => {
-          if (error) {
-            console.error(`Error executing Python script: ${error.message}`);
-            return reject(`Error executing Python script: ${error.message}`);
-          }
+    // Handle stdout
+    process.stdout.on('data', (data) => {
+      console.log(`Python script output: ${data}`);
+    });
 
-          if (stderr) {
-            console.warn(`Python script stderr: ${stderr}`);
-          }
+    // Handle stderr
+    process.stderr.on('data', (data) => {
+      console.warn(`Python script stderr: ${data}`);
+    });
 
-          console.log(`Python script output: ${stdout}`);
-          resolve(stdout); // Return the Python script output
-        },
-      );
+    // Handle script exit
+    process.on('exit', (code) => {
+      if (code === 0) {
+        console.log(`Python script finished successfully.`);
+      } else {
+        console.error(`Python script exited with code: ${code}`);
+      }
+    });
+
+    // Handle errors
+    process.on('error', (error) => {
+      console.error(`Error starting Python script: ${error.message}`);
     });
   }
 

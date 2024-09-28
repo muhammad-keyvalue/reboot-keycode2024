@@ -1,17 +1,17 @@
 [
   {
-    "imageName": "Driving_cat-test5.png",
-    "downloadUrl": "http://localhost:3000/files/Driving_cat-test5_1.png",
+    "imageName": "Driving_cat-test6.png",
+    "downloadUrl": "http://localhost:3000/files/Driving_cat-test6_1.png",
     "detectionRate": 2
   },
   {
-    "imageName": "Driving_cat-test5.png",
-    "downloadUrl": "http://localhost:3000/files/Driving_cat-test5_2.png",
+    "imageName": "Driving_cat-test6.png",
+    "downloadUrl": "http://localhost:3000/files/Driving_cat-test6_2.png",
     "detectionRate": 5
   },
   {
-    "imageName": "Driving_cat-test5.png",
-    "downloadUrl": "http://localhost:3000/files/Driving_cat-test5_3.png",
+    "imageName": "Driving_cat-test6.png",
+    "downloadUrl": "http://localhost:3000/files/Driving_cat-test6_3.png",
     "detectionRate": 8
   }
 ]
