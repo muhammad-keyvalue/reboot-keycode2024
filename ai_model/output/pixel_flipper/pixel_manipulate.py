@@ -3,10 +3,9 @@ from PIL import Image
 import numpy as np
 
 
-def flip_random_pixels(image_path, output_path, flip_percentage=0.001):
+def flip_random_pixels(img, flip_percentage=0.01):
     # Open the image
-    img = Image.open(image_path)
-    img = img.convert("RGB")  # Ensure it's in RGB format
+    img = img.convert('RGB')  # Ensure it's in RGB format
 
     # Convert image to numpy array for pixel manipulation
     img_array = np.array(img)
@@ -30,5 +29,4 @@ def flip_random_pixels(image_path, output_path, flip_percentage=0.001):
     flipped_img = Image.fromarray(img_array)
 
     # Save the new image
-    flipped_img.save(output_path)
-    print(f"Saved flipped image at {output_path}")
+    return flipped_img
